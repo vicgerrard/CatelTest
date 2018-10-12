@@ -1,32 +1,27 @@
-﻿namespace CatelTest.ViewModels
+﻿using System;
+using System.Collections.ObjectModel;
+using CatelTest.Models;
+
+namespace CatelTest.ViewModels
 {
     using Catel.MVVM;
-    using System.Threading.Tasks;
 
     public class MainWindowViewModel : ViewModelBase
     {
+        public ObservableCollection<Person> Persons { get; set; }
+        public Person SelectedPerson { get; set; }
+        public Command RemovePersonCommand { get; set; }
         public MainWindowViewModel()
         {
+            Persons = new ObservableCollection<Person>();
+            Persons.Add(new Person
+            {
+                BirthDate = DateTime.Today,
+                Name =  "1324134"
+            });
+            RemovePersonCommand = new Command(() => Persons.Remove(SelectedPerson), () => SelectedPerson != null);
         }
 
         public override string Title { get { return "CatelTest"; } }
-
-        // TODO: Register models with the vmpropmodel codesnippet
-        // TODO: Register view model properties with the vmprop or vmpropviewmodeltomodel codesnippets
-        // TODO: Register commands with the vmcommand or vmcommandwithcanexecute codesnippets
-
-        protected override async Task InitializeAsync()
-        {
-            await base.InitializeAsync();
-
-            // TODO: subscribe to events here
-        }
-
-        protected override async Task CloseAsync()
-        {
-            // TODO: unsubscribe from events here
-
-            await base.CloseAsync();
-        }
     }
 }
