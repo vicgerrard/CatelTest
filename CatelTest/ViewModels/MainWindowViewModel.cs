@@ -14,11 +14,6 @@ namespace CatelTest.ViewModels
         public MainWindowViewModel()
         {
             Persons = new ObservableCollection<Person>();
-            Persons.Add(new Person
-            {
-                BirthDate = DateTime.Today,
-                Name =  "1324134"
-            });
             RemovePersonCommand = new Command(() => Persons.Remove(SelectedPerson), () => SelectedPerson != null);
         }
 
